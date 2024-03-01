@@ -15,6 +15,7 @@ import com.nageoffer.shortlink.admin.dto.req.UserRegisterReqDTO;
 import com.nageoffer.shortlink.admin.dto.req.UserUpdateReqDTO;
 import com.nageoffer.shortlink.admin.dto.resq.UserLoginResqDTO;
 import com.nageoffer.shortlink.admin.dto.resq.UserResqDTO;
+import com.nageoffer.shortlink.admin.service.GroupService;
 import com.nageoffer.shortlink.admin.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.redisson.api.RBloomFilter;
@@ -41,6 +42,7 @@ public class UserServiceimpl extends ServiceImpl<UserMapper, UserDo> implements 
     private final RBloomFilter<String> userRegisterCachePenetrationBloomFilter;
     private final RedissonClient redissonClient;
     private final StringRedisTemplate stringRedisTemplate;
+    private final GroupService groupService;
     @Override
     public UserResqDTO getUserByUserName(String username) {
         LambdaQueryWrapper<UserDo> queryMapper = Wrappers.lambdaQuery(UserDo.class).eq(UserDo::getUsername, username);
@@ -79,6 +81,7 @@ public class UserServiceimpl extends ServiceImpl<UserMapper, UserDo> implements 
                     throw new ClientException(USER_SAVE_ERROR);
                 }
                 userRegisterCachePenetrationBloomFilter.add(requestParam.getUsername());
+                groupService.saveGroup(requestParam.getUsername(), "默认分组");
                 return;
             }
             throw new ClientException(USER_EXIST);

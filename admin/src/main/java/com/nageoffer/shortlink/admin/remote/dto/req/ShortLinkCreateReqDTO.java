@@ -15,34 +15,34 @@
  * limitations under the License.
  */
 
-package com.nageoffer.shortlink.project.dao.entity;
+package com.nageoffer.shortlink.admin.remote.dto.req;
 
-import com.baomidou.mybatisplus.annotation.TableName;
-import com.nageoffer.shortlink.project.common.database.BaseDO;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.Date;
+
 /**
- * 访问日志监控实体
+ * 短链接创建请求对象
  */
 @Data
-@TableName("t_link_access_logs")
-@Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class LinkAccessLogsDO extends BaseDO {
+@Builder
+public class ShortLinkCreateReqDTO {
 
     /**
-     * id
+     * 域名
      */
-    private Long id;
+    private String domain;
 
     /**
-     * 完整短链接
+     * 原始链接
      */
-    private String fullShortUrl;
+    private String originUrl;
 
     /**
      * 分组标识
@@ -50,37 +50,23 @@ public class LinkAccessLogsDO extends BaseDO {
     private String gid;
 
     /**
-     * 用户信息
+     * 创建类型 0：接口创建 1：控制台创建
      */
-    private String user;
+    private Integer createdType;
 
     /**
-     * 浏览器
+     * 有效期类型 0：永久有效 1：自定义
      */
-    private String browser;
+    private Integer validDateType;
 
     /**
-     * 操作系统
+     * 有效期
      */
-    private String os;
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
+    private Date validDate;
 
     /**
-     * ip
+     * 描述
      */
-    private String ip;
-
-    /**
-     * 访问网络
-     */
-    private String network;
-
-    /**
-     * 访问设备
-     */
-    private String device;
-
-    /**
-     * 地区
-     */
-    private String locale;
+    private String describe;
 }

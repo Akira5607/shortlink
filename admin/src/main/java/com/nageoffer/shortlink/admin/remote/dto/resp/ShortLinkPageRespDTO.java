@@ -15,24 +15,18 @@
  * limitations under the License.
  */
 
-package com.nageoffer.shortlink.project.dao.entity;
+package com.nageoffer.shortlink.admin.remote.dto.resp;
 
-import com.baomidou.mybatisplus.annotation.TableName;
-import com.nageoffer.shortlink.project.common.database.BaseDO;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
-import lombok.NoArgsConstructor;
+
+import java.util.Date;
 
 /**
- * 访问日志监控实体
+ * 短链接分页返回参数
  */
 @Data
-@TableName("t_link_access_logs")
-@Builder
-@NoArgsConstructor
-@AllArgsConstructor
-public class LinkAccessLogsDO extends BaseDO {
+public class ShortLinkPageRespDTO {
 
     /**
      * id
@@ -40,9 +34,24 @@ public class LinkAccessLogsDO extends BaseDO {
     private Long id;
 
     /**
+     * 域名
+     */
+    private String domain;
+
+    /**
+     * 短链接
+     */
+    private String shortUri;
+
+    /**
      * 完整短链接
      */
     private String fullShortUrl;
+
+    /**
+     * 原始链接
+     */
+    private String originUrl;
 
     /**
      * 分组标识
@@ -50,37 +59,59 @@ public class LinkAccessLogsDO extends BaseDO {
     private String gid;
 
     /**
-     * 用户信息
+     * 有效期类型 0：永久有效 1：自定义
      */
-    private String user;
+    private Integer validDateType;
 
     /**
-     * 浏览器
+     * 有效期
      */
-    private String browser;
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
+    private Date validDate;
 
     /**
-     * 操作系统
+     * 创建时间
      */
-    private String os;
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
+    private Date createTime;
 
     /**
-     * ip
+     * 描述
      */
-    private String ip;
+    private String describe;
 
     /**
-     * 访问网络
+     * 网站标识
      */
-    private String network;
+    private String favicon;
 
     /**
-     * 访问设备
+     * 历史PV
      */
-    private String device;
+    private Integer totalPv;
 
     /**
-     * 地区
+     * 今日PV
      */
-    private String locale;
+    private Integer todayPv;
+
+    /**
+     * 历史UV
+     */
+    private Integer totalUv;
+
+    /**
+     * 今日UV
+     */
+    private Integer todayUv;
+
+    /**
+     * 历史UIP
+     */
+    private Integer totalUip;
+
+    /**
+     * 今日UIP
+     */
+    private Integer todayUip;
 }

@@ -1,4 +1,4 @@
-package com.nageoffer.shortlink.admin.config;
+package com.nageoffer.shortlink.project.config;
 
 import org.redisson.api.RBloomFilter;
 import org.redisson.api.RedissonClient;
@@ -7,16 +7,17 @@ import org.springframework.context.annotation.Configuration;
 
 /**
  * 布隆过滤器配置
+ * @author juzi
  */
 @Configuration
 public class RBloomFilterConfiguration {
 
     /**
-     * 防止用户注册查询数据库的布隆过滤器
+     * 防止短链接创建查询数据库的布隆过滤器
      */
     @Bean
-    public RBloomFilter<String> userRegisterCachePenetrationBloomFilter(RedissonClient redissonClient) {
-        RBloomFilter<String> cachePenetrationBloomFilter = redissonClient.getBloomFilter("userRegisterCachePenetrationBloomFilter");
+    public RBloomFilter<String> shortUriCreateCachePenetrationBloomFilter(RedissonClient redissonClient) {
+        RBloomFilter<String> cachePenetrationBloomFilter = redissonClient.getBloomFilter("shortUriCreateCachePenetrationBloomFilter");
         cachePenetrationBloomFilter.tryInit(100000, 0.001);
         return cachePenetrationBloomFilter;
     }

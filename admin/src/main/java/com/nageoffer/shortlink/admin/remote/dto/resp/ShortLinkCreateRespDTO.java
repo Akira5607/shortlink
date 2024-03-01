@@ -15,72 +15,34 @@
  * limitations under the License.
  */
 
-package com.nageoffer.shortlink.project.dao.entity;
+package com.nageoffer.shortlink.admin.remote.dto.resp;
 
-import com.baomidou.mybatisplus.annotation.TableName;
-import com.nageoffer.shortlink.project.common.database.BaseDO;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 /**
- * 访问日志监控实体
+ * 短链接创建响应对象
  */
 @Data
-@TableName("t_link_access_logs")
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class LinkAccessLogsDO extends BaseDO {
+public class ShortLinkCreateRespDTO {
 
     /**
-     * id
-     */
-    private Long id;
-
-    /**
-     * 完整短链接
-     */
-    private String fullShortUrl;
-
-    /**
-     * 分组标识
+     * 分组信息
      */
     private String gid;
 
     /**
-     * 用户信息
+     * 原始链接
      */
-    private String user;
+    private String originUrl;
 
     /**
-     * 浏览器
+     * 短链接
      */
-    private String browser;
-
-    /**
-     * 操作系统
-     */
-    private String os;
-
-    /**
-     * ip
-     */
-    private String ip;
-
-    /**
-     * 访问网络
-     */
-    private String network;
-
-    /**
-     * 访问设备
-     */
-    private String device;
-
-    /**
-     * 地区
-     */
-    private String locale;
+    private String fullShortUrl;
 }
